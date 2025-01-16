@@ -1,0 +1,18 @@
+if(vars.get("Aresponse").equals(vars.get("e_response")) && vars.get("error").equals(vars.get("e_error")) )
+{
+	log.info("Matched");
+}
+else{
+	ResponseCode=500;
+	ResponseMessage="ok ok";
+	vars.put("messageFailure",ResponseMessage);
+}
+if(vars.get("BalanceChecker").equals("false")){
+	ResponseCode=500;
+	ResponseMessage=vars.get("messageFailure");
+}
+
+vars.put("caseId","${CaseId}");
+vars.put("actual_result","${error}");
+vars.put("expected_result","${e_error}");
+vars.put("caseName","${TestCaseName}");
