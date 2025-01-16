@@ -1,0 +1,31 @@
+if(${__P(printOutputConsole,1)}==1){
+//Console writing and file writing here
+ //Start of programming here 
+import java.io.FileWriter;
+import org.apache.jmeter.services.FileServer;
+import java.io.File;
+
+//Variable initialization and value assigning here
+
+String sampleName = prev.getSampleLabel();
+if(sampleName.startsWith("TC_")){
+
+Long responseTime = prev.getTime(); 
+Long responseSize = prev.getBytesAsLong();
+Boolean isResponseSuccessful = prev.isSuccessful();
+StringBuilder sb=new StringBuilder();
+sb.append(sampleName+","+responseTime+","+responseSize+","+isResponseSuccessful+"\n");
+log.info(sb.toString());
+String []header={"SampleName","ResponseTime","ResponseSize","isResponseSuccessful"};
+	System.out.println("Case ID:"+"${CaseId}");
+	System.out.println("Case Name:" +"${TestCaseName}");
+	System.out.println(" Response Time of Test Case : "+responseTime);
+	System.out.println(" Response Size of Test Case : "+responseSize);
+	System.out.println(" Status of Test Case executed : "+isResponseSuccessful);
+	System.out.println();
+}
+	responseTime=null;
+	responseSize=null;
+	isResponseSuccesful=null;
+	sb=null;
+}
