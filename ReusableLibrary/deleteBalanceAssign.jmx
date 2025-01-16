@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="3.1" jmeter="3.1 r1770033">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Test Fragment" enabled="false"/>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="delCounter" elementType="Argument">
+              <stringProp name="Argument.name">delCounter</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="delLoanCounter" elementType="Argument">
+              <stringProp name="Argument.name">delLoanCounter</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="delAccCounter" elementType="Argument">
+              <stringProp name="Argument.name">delAccCounter</stringProp>
+              <stringProp name="Argument.value">1</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="savingStatus" elementType="Argument">
+              <stringProp name="Argument.name">savingStatus</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="loanStatus" elementType="Argument">
+              <stringProp name="Argument.name">loanStatus</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+            <elementProp name="accStatus" elementType="Argument">
+              <stringProp name="Argument.name">accStatus</stringProp>
+              <stringProp name="Argument.value">true</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach MemberBalance Controller" enabled="true">
+          <stringProp name="ForeachController.inputVal">delMemBal</stringProp>
+          <stringProp name="ForeachController.returnVal"></stringProp>
+          <boolProp name="ForeachController.useSeparator">false</boolProp>
+        </ForeachController>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">&quot;${savingStatus}&quot;==&quot;true&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Member Balance ${delCounter} Assigner ${CaseID}" enabled="true">
+              <stringProp name="BeanShellSampler.query">if(${__javaScript(&quot;${__V(delMemBal${delCounter})}&quot;==&quot;&quot;)}){
+	vars.put(&quot;memBal&quot;+&quot;${delCounter}&quot;,&quot;&quot;);
+	vars.put(&quot;savingStatus&quot;,&quot;false&quot;);
+}
+else{
+	vars.put(&quot;memBal&quot;+&quot;${delCounter}&quot;,&quot;${__V(delMemBal${delCounter})}&quot;);
+	log.info(&quot;${__V(delMemBal${delCounter})}&quot;);
+	int temp=Integer.parseInt(vars.get(&quot;delCounter&quot;));
+	temp=temp+1;
+	vars.put(&quot;delCounter&quot;,temp.toString());
+}
+
+</stringProp>
+              <stringProp name="BeanShellSampler.filename"></stringProp>
+              <stringProp name="BeanShellSampler.parameters"></stringProp>
+              <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+            </BeanShellSampler>
+            <hashTree>
+              <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
+                <boolProp name="displayJMeterProperties">false</boolProp>
+                <boolProp name="displayJMeterVariables">true</boolProp>
+                <boolProp name="displaySamplerProperties">true</boolProp>
+                <boolProp name="displaySystemProperties">false</boolProp>
+              </DebugPostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach MemberLoan Controller" enabled="true">
+          <stringProp name="ForeachController.inputVal">delMemLoan</stringProp>
+          <stringProp name="ForeachController.returnVal"></stringProp>
+          <boolProp name="ForeachController.useSeparator">false</boolProp>
+        </ForeachController>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">&quot;${loanStatus}&quot;==&quot;true&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Member Loan Balance ${delLoanCounter} Assigner ${CaseID}" enabled="true">
+              <stringProp name="BeanShellSampler.query">if(${__javaScript(&quot;${__V(delMemOut${delLoanCounter})}&quot;==&quot;&quot; &amp;&amp;&quot;${__V(delMemLoan${delLoanCounter})}&quot;==&quot;&quot;)}){
+	vars.put(&quot;memOut&quot;+&quot;${delLoanCounter}&quot;,&quot;&quot;);
+	vars.put(&quot;loanStatus&quot;,&quot;false&quot;);
+}
+else{
+	vars.put(&quot;memOut&quot;+&quot;${delLoanCounter}&quot;,&quot;${__V(delMemOut${delLoanCounter})}&quot;);
+	log.info(&quot;${__V(delMemOut${delLoanCounter})}&quot;);
+	int temp=Integer.parseInt(vars.get(&quot;delLoanCounter&quot;));
+	temp=temp+1;
+	vars.put(&quot;delLoanCounter&quot;,temp.toString());
+}
+</stringProp>
+              <stringProp name="BeanShellSampler.filename"></stringProp>
+              <stringProp name="BeanShellSampler.parameters"></stringProp>
+              <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+            </BeanShellSampler>
+            <hashTree>
+              <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
+                <boolProp name="displayJMeterProperties">false</boolProp>
+                <boolProp name="displayJMeterVariables">true</boolProp>
+                <boolProp name="displaySamplerProperties">true</boolProp>
+                <boolProp name="displaySystemProperties">false</boolProp>
+              </DebugPostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <ForeachController guiclass="ForeachControlPanel" testclass="ForeachController" testname="ForEach Account Balance Controller" enabled="true">
+          <stringProp name="ForeachController.inputVal">delAccBal</stringProp>
+          <stringProp name="ForeachController.returnVal"></stringProp>
+          <boolProp name="ForeachController.useSeparator">false</boolProp>
+        </ForeachController>
+        <hashTree>
+          <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If Controller" enabled="true">
+            <stringProp name="IfController.condition">&quot;${accStatus}&quot;==&quot;true&quot;</stringProp>
+            <boolProp name="IfController.evaluateAll">false</boolProp>
+          </IfController>
+          <hashTree>
+            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Member Account Balance ${delAccCounter} Assigner ${CaseID}" enabled="true">
+              <stringProp name="BeanShellSampler.query">if(${__javaScript(&quot;${__V(delAccBal${delAccCounter})}&quot;==&quot;&quot;)}){
+	vars.put(&quot;accBal&quot;+&quot;${delAccCounter}&quot;,&quot;&quot;);
+	vars.put(&quot;accStatus&quot;,&quot;false&quot;);
+}
+else{
+	vars.put(&quot;accBal&quot;+&quot;${delAccCounter}&quot;,&quot;${__V(delAccBal${delAccCounter})}&quot;);
+	log.info(&quot;${__V(delAccBal${delAccCounter})}&quot;);
+	int temp=Integer.parseInt(vars.get(&quot;delAccCounter&quot;));
+	temp=temp+1;
+	vars.put(&quot;delAccCounter&quot;,temp.toString());
+}
+</stringProp>
+              <stringProp name="BeanShellSampler.filename"></stringProp>
+              <stringProp name="BeanShellSampler.parameters"></stringProp>
+              <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+            </BeanShellSampler>
+            <hashTree>
+              <DebugPostProcessor guiclass="TestBeanGUI" testclass="DebugPostProcessor" testname="Debug PostProcessor" enabled="true">
+                <boolProp name="displayJMeterProperties">false</boolProp>
+                <boolProp name="displayJMeterVariables">true</boolProp>
+                <boolProp name="displaySamplerProperties">true</boolProp>
+                <boolProp name="displaySystemProperties">false</boolProp>
+              </DebugPostProcessor>
+              <hashTree/>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Variable default assigner" enabled="true">
+          <stringProp name="BeanShellSampler.query">vars.put(&quot;accStatus&quot;,&quot;true&quot;);
+vars.put(&quot;savingStatus&quot;,&quot;true&quot;);
+vars.put(&quot;loanStatus&quot;,&quot;true&quot;);
+vars.put(&quot;delCounter&quot;,&quot;1&quot;);
+vars.put(&quot;delLoanCounter&quot;,&quot;1&quot;);
+vars.put(&quot;delAccCounter&quot;,&quot;1&quot;);
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
