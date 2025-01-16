@@ -1,0 +1,10 @@
+
+public void refreshCapture(){
+	vars.put("actual_result","");
+	vars.put("expected_result","");
+	vars.put("caseId","");
+	vars.put("caseName","");
+	
+}
+refreshCapture();
+
