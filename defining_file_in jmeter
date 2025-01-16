@@ -1,0 +1,18 @@
+import org.apache.commons.io.FileUtils;
+import java.io.FileReader;
+import org.apache.jmeter.services.FileServer;
+import java.lang.ref.SoftReference;
+SoftReference ScriptFileDir=new SoftReference(new String(FileServer.getFileServer().getBaseDir()));
+SoftReference getDir= new SoftReference(new String(ScriptFileDir.get()+"/"+"${__P(inputFile)}"));
+public void variableAssign(){
+	int readLineNo = FileUtils.readLines(new File(getDir.get())).size();
+	for(int i=1; i<readLineNo;i++){
+		vars.put("VAR_"+i,i.toString());
+	}
+}
+variableAssign();
+ScriptFileDir=null;
+getDir=null;
+
+
+
